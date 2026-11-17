@@ -1,0 +1,12 @@
+mi_hub_movil/
+│
+├── .venv/                  # Entorno virtual de Python
+├── assets/
+│   └── icon.png            # (Opcional) Logo de tu app
+├── src/
+│   ├── __init__.py
+│   ├── db.py               # Conexión y funciones CRUD con Supabase
+│   └── auth.py             # Lógica de Autenticación (Login / Registro)
+├── .env                    # Credenciales secretas (URL y Key de Supabase)
+├── main.py                 # Código principal de la interfaz Flet
+└── requirements.txt        # Dependencias del proyecto
