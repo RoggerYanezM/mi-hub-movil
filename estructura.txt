@@ -10,3 +10,15 @@ mi_hub_movil/
 ├── .env                    # Credenciales secretas (URL y Key de Supabase)
 ├── main.py                 # Código principal de la interfaz Flet
 └── requirements.txt        # Dependencias del proyecto
+
+
+
+mi_hub_movil/
+├── assets/
+├── src/
+│   ├── __init__.py
+│   ├── db.py          # Conexión Supabase + funciones get_items, add_item, update_capitulo, delete_item
+│   └── auth.py        # Login por usuario y registro con usuario + correo
+├── .env
+├── main.py            # Interfaz limpia con menú lateral izquierdo (Drawer), Inicio, Guardados y Configuración
+└── requirements.txt
