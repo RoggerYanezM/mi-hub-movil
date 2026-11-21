@@ -1,3 +1,2 @@
-flet
-supabase
+flet==1.1.2
 python-dotenv

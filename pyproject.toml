@@ -1,2 +1,4 @@
-[tool.flet.app]
-include = [".env"]
+dependencies = [
+  "flet==1.1.2",
+  "python-dotenv",
+]

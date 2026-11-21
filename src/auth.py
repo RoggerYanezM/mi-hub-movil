@@ -1,53 +1,24 @@
-from src.db import supabase
+from src.db import auth_sign_in, auth_sign_up, get_profile_by_username, insert_profile
 
 
 def login_con_usuario(username: str, password: str):
-    perfil_res = (
-        supabase.table("profiles")
-        .select("email, username")
-        .ilike("username", username.strip())
-        .limit(1)
-        .execute()
-    )
-    if not perfil_res.data:
+    perfil = get_profile_by_username(username)
+    if not perfil:
         raise ValueError("Usuario no encontrado.")
-
-    email_usuario = perfil_res.data[0]["email"]
-    res = supabase.auth.sign_in_with_password({
-        "email": email_usuario,
-        "password": password,
-    })
-    return res.user
+    return auth_sign_in(perfil["email"], password)
 
 
 def registrar_usuario(username: str, email: str, password: str):
     clean_user = username.strip()
     clean_email = email.strip()
 
-    existe = (
-        supabase.table("profiles")
-        .select("id")
-        .ilike("username", clean_user)
-        .limit(1)
-        .execute()
-    )
-    if existe.data:
+    if get_profile_by_username(clean_user):
         raise ValueError("Ese nombre de usuario ya está en uso.")
 
-    auth_res = supabase.auth.sign_up({
-        "email": clean_email,
-        "password": password,
-        "options": {"data": {"username": clean_user}},
-    })
-
-    user_obj = getattr(auth_res, "user", None)
-    if user_obj and getattr(user_obj, "id", None):
+    user_obj = auth_sign_up(clean_email, password, clean_user)
+    if user_obj and user_obj.id:
         try:
-            supabase.table("profiles").insert({
-                "id": user_obj.id,
-                "username": clean_user,
-                "email": clean_email,
-            }).execute()
+            insert_profile(user_obj.id, clean_user, clean_email)
         except Exception:
             pass
     return user_obj
