@@ -1,4 +1,17 @@
+[project]
+name = "mi_hub_movil"
+version = "1.0.0"
 dependencies = [
   "flet==1.1.2",
   "python-dotenv",
 ]
+
+[tool.flet]
+product = "MyLife Hub"
+org = "com.mylifehub.app"
+
+[tool.flet.app]
+include = [".env", "assets"]
+
+[tool.flet.android]
+icon = "assets/imagen1.png"

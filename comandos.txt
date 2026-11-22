@@ -3,3 +3,7 @@ git status
 git add .
 git commit -m "Interfaz con panel lateral, lista de guardados, tareas con calendario y configuracion"
 git push origin main
+
+flet run --web --port 8550
+
+flet build apk
